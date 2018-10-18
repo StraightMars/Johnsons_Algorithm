@@ -23,7 +23,7 @@ namespace table_lab_3
             bttn_NumOfWorkers.Enabled = false;
         }
 
-        TextBox[,] linesMatrix = new TextBox[0, 0]; // матрица ребер
+        TextBox[,] worksMatrix = new TextBox[0, 0]; // матрица работ (1 столбец - 1 этап, 2 - 2)
         int numOfWorkers, numOfPoints;
 
         private void txtbx_NumOfWorkers_KeyPress(object sender, KeyPressEventArgs e)
@@ -93,17 +93,17 @@ namespace table_lab_3
             {
                 bttn_NumOfPoints.Enabled = false;
 
-                for (int i = 0; i < linesMatrix.GetLength(0); i++) // удаление предыдущих текстбоксов
+                for (int i = 0; i < worksMatrix.GetLength(0); i++) // удаление предыдущих текстбоксов
                 {
-                    for (int j = 0; j < linesMatrix.GetLength(1); j++)
+                    for (int j = 0; j < worksMatrix.GetLength(1); j++)
                     {
-                        Controls.Remove(linesMatrix[i, j]);
+                        Controls.Remove(worksMatrix[i, j]);
                     }
                 }
 
                 numOfPoints = Convert.ToInt32(txtbx_NumOfPoints.Text); // кол-во вершин
 
-                linesMatrix = new TextBox[numOfPoints - 1, 2]; // матрица ребер
+                worksMatrix = new TextBox[numOfPoints - 1, 2]; // матрица ребер
 
                 int startX = 12; // левая граница по х
                 int endX = 400; // правая граница по х
@@ -118,15 +118,15 @@ namespace table_lab_3
                 int currY = startY;
 
                 // вывод текстбоксов
-                for (int i = 0; i < linesMatrix.GetLength(0); i++)
+                for (int i = 0; i < worksMatrix.GetLength(0); i++)
                 {
-                    for (int j = 0; j < linesMatrix.GetLength(1); j++)
+                    for (int j = 0; j < worksMatrix.GetLength(1); j++)
                     {
-                        linesMatrix[i, j] = new TextBox();
-                        linesMatrix[i, j].Location = new Point(currX, currY);
-                        linesMatrix[i, j].Size = new Size(100, 30);
+                        worksMatrix[i, j] = new TextBox();
+                        worksMatrix[i, j].Location = new Point(currX, currY);
+                        worksMatrix[i, j].Size = new Size(100, 30);
                         //matrix[i, j].Show();
-                        Controls.Add(linesMatrix[i, j]);
+                        Controls.Add(worksMatrix[i, j]);
 
                         if (j == 0)
                         {
@@ -155,7 +155,7 @@ namespace table_lab_3
 
             if (ok)
             {
-                if (linesMatrix.GetLength(0) == 0 || linesMatrix.GetLength(1) == 0)
+                if (worksMatrix.GetLength(0) == 0 || worksMatrix.GetLength(1) == 0)
                 {
                     ok = false;
                     MessageBox.Show("Вы не ввели кол-во вершин!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -164,13 +164,13 @@ namespace table_lab_3
 
             if (ok)
             {
-                for (int i = 0; i < linesMatrix.GetLength(0); i++)
+                for (int i = 0; i < worksMatrix.GetLength(0); i++)
                 {
                     if (ok)
                     {
-                        for (int j = 0; j < linesMatrix.GetLength(1); j++)
+                        for (int j = 0; j < worksMatrix.GetLength(1); j++)
                         {
-                            if (linesMatrix[i, j].Text == "")
+                            if (worksMatrix[i, j].Text == "")
                             {
                                 ok = false;
                                 break;
@@ -188,13 +188,13 @@ namespace table_lab_3
 
             if (ok)
             {
-                char[] firstColumn = new char[linesMatrix.GetLength(0)]; // первый столбец в ребрах
-                char[] secondColumn = new char[linesMatrix.GetLength(0)]; // второй столбец в ребрах
+                char[] firstColumn = new char[worksMatrix.GetLength(0)]; // первый столбец в ребрах
+                char[] secondColumn = new char[worksMatrix.GetLength(0)]; // второй столбец в ребрах
 
-                for(int i = 0; i < linesMatrix.GetLength(0); i++)
+                for(int i = 0; i < worksMatrix.GetLength(0); i++)
                 {
-                    firstColumn[i] = Convert.ToChar(linesMatrix[i, 0].Text);
-                    secondColumn[i] = Convert.ToChar(linesMatrix[i, 1].Text);
+                    firstColumn[i] = Convert.ToChar(worksMatrix[i, 0].Text);
+                    secondColumn[i] = Convert.ToChar(worksMatrix[i, 1].Text);
                 }
 
                 //вызов функции

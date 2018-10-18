@@ -157,11 +157,11 @@ namespace table_lab_3
                 }
 
                 //вызов функции
-                // ТУТ ПАРАМЕТРЫ: ПЕРВЫЙ СТОЛБЕЦ, ВТОРОЙ СТОЛБЕЦ, КОЛ-ВО ВЕРШИН, КОЛ-ВО РАБОЧИХ
-                char[,] result /*= Control.getTimetable(firstColumn, secondColumn, numOfPoints, 2)*/;
+                // ТУТ ПАРАМЕТРЫ: ПЕРВЫЙ СТОЛБЕЦ, ВТОРОЙ СТОЛБЕЦ, КОЛ-ВО РАБОТ
+                string[] result /*= Control.getTimetable(firstColumn, secondColumn, numOfPoints, 2)*/;
 
-                dgv_table.RowCount = result.GetLength(0); // кол-во строк
-                dgv_table.ColumnCount = result.GetLength(1); // кол-во столбцов
+                dgv_table.RowCount = 2; // кол-во строк
+                dgv_table.ColumnCount = result[0].Length; // кол-во столбцов
                 dgv_table.RowHeadersWidth = 50; // Задали ширину столбца с названиями
 
 
@@ -176,7 +176,7 @@ namespace table_lab_3
                         dgv_table.Columns[j].Width = 625 / dgv_table.ColumnCount; // Ширина столбцов
                         dgv_table.Columns[j].SortMode = DataGridViewColumnSortMode.NotSortable; // Нельзя сортировать
 
-                        dgv_table.Rows[i].Cells[j].Value = result[i, j];
+                        dgv_table.Rows[i].Cells[j].Value = result[i][j];
                     }
                 }
             }

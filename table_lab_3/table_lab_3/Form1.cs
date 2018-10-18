@@ -20,45 +20,10 @@ namespace table_lab_3
         private void mainForm_Load(object sender, EventArgs e)
         {
             bttn_NumOfPoints.Enabled = false;
-            bttn_NumOfWorkers.Enabled = false;
         }
 
         TextBox[,] worksMatrix = new TextBox[0, 0]; // матрица работ (1 столбец - 1 этап, 2 - 2)
-        int numOfWorkers, numOfPoints;
-
-        private void txtbx_NumOfWorkers_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar)) // Вводятся только числа
-                e.Handled = true;
-
-            if (e.KeyChar == (char)Keys.Back && txtbx_NumOfWorkers.SelectionStart != 0 &&
-                txtbx_NumOfWorkers.Text != "") // Удаление по нажатию backspace
-            {
-                txtbx_NumOfWorkers.Text = txtbx_NumOfWorkers.Text.Substring(0, txtbx_NumOfWorkers.Text.Length - 1);
-                txtbx_NumOfWorkers.SelectionStart = txtbx_NumOfWorkers.Text.Length;
-            }
-        }
-
-        private void txtbx_NumOfWorkers_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (txtbx_NumOfWorkers.Text != "")
-                bttn_NumOfWorkers.Enabled = true; // Разблокировали кнопку
-            else
-                bttn_NumOfWorkers.Enabled = false; // Заблокировали кнопку
-        }
-        private void bttn_NumOfWorkers_Click(object sender, EventArgs e)
-        {
-            if (Convert.ToInt32(txtbx_NumOfWorkers.Text) > 15 || Convert.ToInt32(txtbx_NumOfWorkers.Text) < 2) // ограничение на кол-во работников
-            {
-                MessageBox.Show("Неверный ввод!\nКол-во исполнителей принимает значение от 2 до 15", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtbx_NumOfWorkers.Text = numOfWorkers.ToString();
-            }
-            else
-            {
-                numOfWorkers = Convert.ToInt32(txtbx_NumOfWorkers.Text); // получили кол-во работников
-                bttn_NumOfWorkers.Enabled = false;
-            }
-        }
+        int numOfPoints;
 
         private void txtbx_NumOfPoints_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -103,12 +68,12 @@ namespace table_lab_3
 
                 numOfPoints = Convert.ToInt32(txtbx_NumOfPoints.Text); // кол-во вершин
 
-                worksMatrix = new TextBox[numOfPoints - 1, 2]; // матрица ребер
+                worksMatrix = new TextBox[numOfPoints, 2]; // матрица ребер
 
                 int startX = 12; // левая граница по х
                 int endX = 400; // правая граница по х
 
-                int startY = 170; // верхняя граница по у
+                int startY = 80; // верхняя граница по у
                 int endY = 700; // нижняя граница по у
 
                 int stepX = (endX - startX) / 2; // шаг по х
@@ -146,12 +111,6 @@ namespace table_lab_3
         private void bttn_Start_Click(object sender, EventArgs e)
         {
             bool ok = true;
-
-            if (numOfWorkers == 0)
-            {
-                ok = false;
-                MessageBox.Show("Вы не ввели кол-во работников!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
 
             if (ok)
             {
@@ -199,7 +158,7 @@ namespace table_lab_3
 
                 //вызов функции
                 // ТУТ ПАРАМЕТРЫ: ПЕРВЫЙ СТОЛБЕЦ, ВТОРОЙ СТОЛБЕЦ, КОЛ-ВО ВЕРШИН, КОЛ-ВО РАБОЧИХ
-                char[,] result = Control.getTimetable(firstColumn, secondColumn, numOfPoints, numOfWorkers);
+                char[,] result = Control.getTimetable(firstColumn, secondColumn, numOfPoints, 2);
 
                 dgv_table.RowCount = result.GetLength(0); // кол-во строк
                 dgv_table.ColumnCount = result.GetLength(1); // кол-во столбцов

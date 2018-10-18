@@ -150,7 +150,7 @@ namespace table_lab_3
                 int[] firstColumn = new int[worksMatrix.GetLength(0)]; // первый столбец в ребрах
                 int[] secondColumn = new int[worksMatrix.GetLength(0)]; // второй столбец в ребрах
 
-                for(int i = 0; i < worksMatrix.GetLength(0); i++)
+                for (int i = 0; i < worksMatrix.GetLength(0); i++)
                 {
                     firstColumn[i] = Convert.ToInt32(worksMatrix[i, 0].Text);
                     secondColumn[i] = Convert.ToInt32(worksMatrix[i, 1].Text);
@@ -158,26 +158,34 @@ namespace table_lab_3
 
                 //вызов функции
                 // ТУТ ПАРАМЕТРЫ: ПЕРВЫЙ СТОЛБЕЦ, ВТОРОЙ СТОЛБЕЦ, КОЛ-ВО РАБОТ
-                string[] result /*= Control.getTimetable(firstColumn, secondColumn, numOfPoints, 2)*/;
+                string[] result = Control.GetTimetable(firstColumn, secondColumn);
 
                 dgv_table.RowCount = 2; // кол-во строк
-                dgv_table.ColumnCount = result[0].Length; // кол-во столбцов
+                dgv_table.Rows[0].HeaderCell.Value = Convert.ToString(1); // Название строк
+                dgv_table.Rows[1].HeaderCell.Value = Convert.ToString(2); // Название строк
+                dgv_table.Rows[0].Height = 450 / dgv_table.RowCount; // Высота строки
+                dgv_table.Rows[1].Height = 450 / dgv_table.RowCount; // Высота строки
+
+                dgv_table.ColumnCount = result[1].Length; // кол-во столбцов
                 dgv_table.RowHeadersWidth = 50; // Задали ширину столбца с названиями
 
 
-                for (int i = 0; i < dgv_table.RowCount; i++)
+                for (int j = 0; j < result[0].Length; j++)
                 {
-                    dgv_table.Rows[i].HeaderCell.Value = Convert.ToString(i + 1); // Название строк
-                    dgv_table.Rows[i].Height = 450 / dgv_table.RowCount; // Высота строки
+                    dgv_table.Columns[j].HeaderText = Convert.ToString(j + 1); // Названия столбцов
+                    dgv_table.Columns[j].Width = 625 / dgv_table.ColumnCount; // Ширина столбцов
+                    dgv_table.Columns[j].SortMode = DataGridViewColumnSortMode.NotSortable; // Нельзя сортировать
 
-                    for (int j = 0; j < dgv_table.ColumnCount; j++)
-                    {
-                        dgv_table.Columns[j].HeaderText = Convert.ToString(j + 1); // Названия столбцов
-                        dgv_table.Columns[j].Width = 625 / dgv_table.ColumnCount; // Ширина столбцов
-                        dgv_table.Columns[j].SortMode = DataGridViewColumnSortMode.NotSortable; // Нельзя сортировать
+                    dgv_table.Rows[0].Cells[j].Value = result[0][j];
+                }
 
-                        dgv_table.Rows[i].Cells[j].Value = result[i][j];
-                    }
+                for (int j = 0; j < result[1].Length; j++)
+                {
+                    dgv_table.Columns[j].HeaderText = Convert.ToString(j + 1); // Названия столбцов
+                    dgv_table.Columns[j].Width = 625 / dgv_table.ColumnCount; // Ширина столбцов
+                    dgv_table.Columns[j].SortMode = DataGridViewColumnSortMode.NotSortable; // Нельзя сортировать
+
+                    dgv_table.Rows[1].Cells[j].Value = result[1][j];
                 }
             }
         }

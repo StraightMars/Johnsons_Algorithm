@@ -147,18 +147,18 @@ namespace table_lab_3
 
             if (ok)
             {
-                char[] firstColumn = new char[worksMatrix.GetLength(0)]; // первый столбец в ребрах
-                char[] secondColumn = new char[worksMatrix.GetLength(0)]; // второй столбец в ребрах
+                int[] firstColumn = new int[worksMatrix.GetLength(0)]; // первый столбец в ребрах
+                int[] secondColumn = new int[worksMatrix.GetLength(0)]; // второй столбец в ребрах
 
                 for(int i = 0; i < worksMatrix.GetLength(0); i++)
                 {
-                    firstColumn[i] = Convert.ToChar(worksMatrix[i, 0].Text);
-                    secondColumn[i] = Convert.ToChar(worksMatrix[i, 1].Text);
+                    firstColumn[i] = Convert.ToInt32(worksMatrix[i, 0].Text);
+                    secondColumn[i] = Convert.ToInt32(worksMatrix[i, 1].Text);
                 }
 
                 //вызов функции
                 // ТУТ ПАРАМЕТРЫ: ПЕРВЫЙ СТОЛБЕЦ, ВТОРОЙ СТОЛБЕЦ, КОЛ-ВО ВЕРШИН, КОЛ-ВО РАБОЧИХ
-                char[,] result = Control.getTimetable(firstColumn, secondColumn, numOfPoints, 2);
+                char[,] result /*= Control.getTimetable(firstColumn, secondColumn, numOfPoints, 2)*/;
 
                 dgv_table.RowCount = result.GetLength(0); // кол-во строк
                 dgv_table.ColumnCount = result.GetLength(1); // кол-во столбцов

@@ -50,10 +50,10 @@ namespace Ex4JohnsonsAlgorythm
                 Console.WriteLine();
             }
         }
-        public static void GetTimetable(int[] firstColumn, int[] secondColumn, out string firstString, out string secondString)
+        public static string[] GetTimetable(int[] firstColumn, int[] secondColumn)
         {
-            firstString = "";
-            secondString = "";
+            string firstString = "";
+            string secondString = "";
             char[] name = new char[firstColumn.Length];
             for (int i = 0; i < name.Length; i++)
             {
@@ -103,33 +103,46 @@ namespace Ex4JohnsonsAlgorythm
             int newOccupancy = 0;
             int oldOccupancy = 0;
             int[] workEnds = new int[finalMatrix.GetLength(0)];
-            Console.Write("1-ый исполнитель: ");
             for (int i = 0; i < finalMatrix.GetLength(0); i++)
             {
                 newOccupancy += finalMatrix[i, 0];
+                int x = finalMatrix[i, 0];
                 workEnds[i] = newOccupancy;
-                firstString += name[i] + "(" + oldOccupancy.ToString() + "-" + newOccupancy.ToString() + ")" + " ";
-                Console.Write("{0}({1}-{2})  ", name[i], oldOccupancy, newOccupancy);
+                while (x != 0)
+                {
+                    firstString += name[i];
+                    x--;
+                }
                 oldOccupancy = newOccupancy;
             }
             newOccupancy = 0;
             oldOccupancy = 0;
-            Console.WriteLine();
-            Console.Write("2-ой исполнитель: ");
             for (int i = 0; i < finalMatrix.GetLength(0); i++)
             {
                 if (newOccupancy < workEnds[i])
                 {
+                    int buf = newOccupancy;
+                    while (buf < workEnds[i])
+                    {
+                        secondString += " ";
+                        buf++;
+                    }
                     newOccupancy = workEnds[i];
                     oldOccupancy = workEnds[i];
                 }
                 newOccupancy += finalMatrix[i, 1];
-                secondString += name[i] + "(" + oldOccupancy.ToString() + "-" + newOccupancy.ToString() + ")" + " ";
-                Console.Write("{0}({1}-{2})  ", name[i], oldOccupancy, newOccupancy);
+                int x = finalMatrix[i, 1];
+                while (x != 0)
+                {
+                    secondString += name[i];
+                    x--;
+                }
                 oldOccupancy = newOccupancy;
             }
-            Console.WriteLine();
-            Console.ReadKey();
+            string[] arr = new string[2];
+            arr[0] = firstString;
+            arr[1] = secondString;
+            return arr;
         }
     }
 }

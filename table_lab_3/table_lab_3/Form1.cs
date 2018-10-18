@@ -86,7 +86,7 @@ namespace table_lab_3
         {
             if (Convert.ToInt32(txtbx_NumOfPoints.Text) > 15 || Convert.ToInt32(txtbx_NumOfPoints.Text) < 2) // ограничение на кол-во вершин
             {
-                MessageBox.Show("Неверный ввод!\nКол-во вершин принимает значение от 2 до 15", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Неверный ввод!\nКол-во работ принимает значение от 2 до 15", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtbx_NumOfPoints.Text = numOfPoints.ToString();
             }
             else
@@ -158,7 +158,7 @@ namespace table_lab_3
                 if (worksMatrix.GetLength(0) == 0 || worksMatrix.GetLength(1) == 0)
                 {
                     ok = false;
-                    MessageBox.Show("Вы не ввели кол-во вершин!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Вы не ввели кол-во работ!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
